@@ -1,11 +1,9 @@
 package entities;
 
-import dao.EntitiesDao;
-
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 
-public class Department implements Serializable, EntitiesDao<Department> {
+public class Department implements Serializable {
 
     //Attributes
     private Integer id;
@@ -19,28 +17,22 @@ public class Department implements Serializable, EntitiesDao<Department> {
 
     //Methods
     @Override
-    public void insert(Department o) {
-
+    public String toString(){
+        return "\n ID: " + getId() + "\n"
+                + "Name: " + getName();
     }
 
     @Override
-    public void update(Department o) {
-
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override
-    public void deleteById(Integer id) {
-
-    }
-
-    @Override
-    public Department findById(Integer id) {
-        return null;
-    }
-
-    @Override
-    public List<Department> findAll() {
-        return null;
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     //Accessors
