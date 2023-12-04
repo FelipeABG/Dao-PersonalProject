@@ -11,8 +11,8 @@ public abstract class Entity {
         return DB_TABLE_NAME;
     }
 
-    public static void setTableName(String DB_TABLE_NAME) {
-        this.DB_TABLE_NAME = DB_TABLE_NAME;
+    public static void setTableName(String name) {
+        DB_TABLE_NAME = name;
     }
 
     public Integer getId() {

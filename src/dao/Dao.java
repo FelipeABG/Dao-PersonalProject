@@ -1,9 +1,7 @@
 package dao;
 
-import db.DB;
 import db.DataBaseException;
 import entities.Entity;
-
 import java.sql.*;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public interface EntitiesDao<entity extends Entity>{
     void insert(entity o);
     void update(entity o);
     List<entity> findAll();
-    entity findById(Integer id, Connection conn);
+    entity findById(Integer id);
 
     //Default methods
     default void deleteById(Integer id, Connection conn){
@@ -31,7 +29,5 @@ public interface EntitiesDao<entity extends Entity>{
             throw new DataBaseException(e.getMessage());
         }
     }
-
-
 
 }
