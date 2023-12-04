@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Department extends Entity implements Serializable{
+public class Department extends ModelEntity implements Serializable{
 
     //Attributes
     private String name;

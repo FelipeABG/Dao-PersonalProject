@@ -1,11 +1,11 @@
 package dao;
 
 import db.DataBaseException;
-import entities.Entity;
+import entities.ModelEntity;
 import java.sql.*;
 import java.util.List;
 
-public interface EntitiesDao<entity extends Entity>{
+public interface Dao<entity extends ModelEntity>{
 
     //Abstract methods
     void insert(entity o);

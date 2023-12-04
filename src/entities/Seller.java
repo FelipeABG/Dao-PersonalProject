@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Seller extends Entity implements Serializable {
+public class Seller extends ModelEntity implements Serializable {
 
     //Attributes
     private String name;

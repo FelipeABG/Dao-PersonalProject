@@ -1,6 +1,6 @@
 package entities;
 
-public abstract class Entity {
+public abstract class ModelEntity {
 
     //Attributes
     private static String DB_TABLE_NAME;
