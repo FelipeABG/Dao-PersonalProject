@@ -3,10 +3,9 @@ package entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Department extends Entity implements Serializable {
+public class Department extends Entity implements Serializable{
 
     //Attributes
-    private Integer id;
     private String name;
 
     //Constructor
@@ -28,23 +27,15 @@ public class Department extends Entity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(getId(), that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 
     //Accessors
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

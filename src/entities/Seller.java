@@ -7,7 +7,6 @@ import java.util.Objects;
 public class Seller extends Entity implements Serializable {
 
     //Attributes
-    private Integer id;
     private String name;
     private String email;
     private LocalDate birthDate;
@@ -42,23 +41,15 @@ public class Seller extends Entity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seller seller = (Seller) o;
-        return Objects.equals(id, seller.id);
+        return Objects.equals(getId(), seller.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 
     //Accessors
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

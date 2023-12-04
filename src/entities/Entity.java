@@ -2,15 +2,24 @@ package entities;
 
 public abstract class Entity {
 
-    //Static attributes
+    //Attributes
     private static String DB_TABLE_NAME;
+    private Integer id;
 
-    //Static methods
-    protected static void setTableName(String name){
-        DB_TABLE_NAME = name;
-    }
-    protected static String getTableName(){
+    //Methods
+    public static String getTableName() {
         return DB_TABLE_NAME;
     }
 
+    public static void setTableName(String DB_TABLE_NAME) {
+        this.DB_TABLE_NAME = DB_TABLE_NAME;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
