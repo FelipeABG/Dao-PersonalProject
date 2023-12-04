@@ -18,7 +18,7 @@ public class Department extends ModelEntity implements Serializable{
     //Methods
     @Override
     public String toString(){
-        return "\n ID: " + getId() + "\n"
+        return "\nID: " + getId() + "\n"
                 + "Name: " + getName();
     }
 
