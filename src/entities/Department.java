@@ -3,7 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Department implements Serializable {
+public class Department extends Entity implements Serializable {
 
     //Attributes
     private Integer id;
@@ -13,6 +13,7 @@ public class Department implements Serializable {
     public Department(Integer id, String name) {
         setId(id);
         setName(name);
+        setTableName("department");
     }
 
     //Methods
@@ -51,6 +52,5 @@ public class Department implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
 
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Seller implements Serializable {
+public class Seller extends Entity implements Serializable {
 
     //Attributes
     private Integer id;
@@ -22,6 +22,7 @@ public class Seller implements Serializable {
         setBirthDate(birth_date);
         setBaseSalary(baseSalary);
         setDepartment(department);
+        setTableName("seller");
     }
 
     //Methods
