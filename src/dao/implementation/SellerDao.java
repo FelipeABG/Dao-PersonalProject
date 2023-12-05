@@ -24,7 +24,39 @@ public class SellerDao implements Dao<Seller> {
     //Methods
     @Override
     public void insert(Seller o) {
+        PreparedStatement statement = null;
+        try {
+            statement = conn.prepareStatement("insert into seller " +
+                    "(seller_name, email, birth_date, base_salary, department_id) " +
+                    "values " +
+                    "(?, ?, ?, ?, ?);", statement.RETURN_GENERATED_KEYS);
 
+            statement.setString(1, o.getName());
+            statement.setString(2, o.getEmail());
+            statement.setDate(3, o.getBirthDate());
+            statement.setDouble(4, o.getBaseSalary());
+            statement.setInt(5, o.getDepartment().getId());
+
+            int rowsAffected = statement.executeUpdate();
+
+            if(rowsAffected > 0){
+                ResultSet result = statement.getGeneratedKeys();
+                if(result.next()){
+                    int id = result.getInt(1);
+                    o.setId(id);
+                }
+            }
+            else{
+                throw new DataBaseException("No rows affected.");
+            }
+
+        }
+        catch (SQLException e){
+            throw new DataBaseException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(statement);
+        }
     }
 
     @Override
@@ -131,8 +163,11 @@ public class SellerDao implements Dao<Seller> {
         Date sellerBirthDate = result.getDate("birth_date");
         Double sellerSalary = result.getDouble("base_salary");
 
-        return new Seller(sellerId, sellerName, sellerEmail,
+        Seller sl = new Seller( sellerName, sellerEmail,
                 sellerBirthDate, sellerSalary, department);
+
+        sl.setId(sellerId);
+        return sl;
     }
 
     private Department instanciateDepartment(ResultSet result) throws SQLException{

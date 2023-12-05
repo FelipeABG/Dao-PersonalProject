@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class Seller extends ModelEntity implements Serializable {
@@ -15,8 +14,7 @@ public class Seller extends ModelEntity implements Serializable {
     private Department department;
 
     //Constructor
-    public Seller(Integer id, String name, String email, Date birth_date, Double baseSalary, Department department) {
-        setId(id);
+    public Seller( String name, String email, Date birth_date, Double baseSalary, Department department) {
         setName(name);
         setEmail(email);
         setBirthDate(birth_date);
