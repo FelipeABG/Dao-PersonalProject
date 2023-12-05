@@ -7,7 +7,9 @@ import entities.Department;
 import entities.Seller;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SellerDao implements Dao<Seller> {
 
@@ -32,7 +34,37 @@ public class SellerDao implements Dao<Seller> {
 
     @Override
     public List<Seller> findAll() {
-        return null;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        List<Seller> list = new ArrayList<>();
+        Map<Integer, Department> map = new HashMap<>();
+
+        try {
+            statement = conn.prepareStatement("select * from " +
+                    "seller join department " +
+                    "on seller.department_id = department.id ");
+
+            result = statement.executeQuery();
+
+            while (result.next()){
+                Department dp = map.get(result.getInt("department_id"));
+
+                if(dp == null){
+                    dp = instanciateDepartment(result);
+                    map.put(result.getInt("department_id"), dp);
+                }
+
+                list.add(instanciateSeller(result, dp));
+            }
+            return list;
+        }
+        catch (SQLException e){
+            throw new DataBaseException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(statement);
+            DB.closeResultSet(result);
+        }
     }
 
     @Override
