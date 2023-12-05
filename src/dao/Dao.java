@@ -2,7 +2,10 @@ package dao;
 
 import db.DB;
 import db.DataBaseException;
+import entities.Department;
 import entities.ModelEntity;
+import entities.Seller;
+
 import java.sql.*;
 import java.util.List;
 
@@ -13,23 +16,30 @@ public interface Dao<entity extends ModelEntity>{
     void update(entity o);
     List<entity> findAll();
     entity findById(Integer id);
+    void deleteById(Integer id);
 
     //Default methods
-    default void deleteById(Integer id){
-        String tableName = entity.getTableName();
-        Connection conn = DB.getConnection();
-        try{
-            PreparedStatement statement = conn.prepareStatement("delete from " +tableName + " where id = ?");
+     default Seller instanciateSeller(ResultSet result, Department department) throws SQLException{
+        String sellerName = result.getString("seller_name");
+        Integer sellerId = result.getInt("id");
+        String sellerEmail = result.getString("email");
+        Date sellerBirthDate = result.getDate("birth_date");
+        Double sellerSalary = result.getDouble("base_salary");
 
-            statement.setString(1, tableName);
-            statement.setInt(2, id);
+        Seller sl = new Seller( sellerName, sellerEmail,
+                sellerBirthDate, sellerSalary, department);
 
-            statement.executeUpdate();
-            statement.close();
-        }
-        catch (SQLException e){
-            throw new DataBaseException(e.getMessage());
-        }
+        sl.setId(sellerId);
+        return sl;
+    }
+
+    default Department instanciateDepartment(ResultSet result) throws SQLException{
+        String departmentName = result.getString("department_name");
+        Integer departmentId = result.getInt("id");
+        Department dp = new Department(departmentName);
+
+        dp.setId(departmentId);
+        return dp;
     }
 
 }

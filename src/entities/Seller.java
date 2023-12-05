@@ -20,7 +20,6 @@ public class Seller extends ModelEntity implements Serializable {
         setBirthDate(birth_date);
         setBaseSalary(baseSalary);
         setDepartment(department);
-        setTableName("seller");
     }
 
     //Methods

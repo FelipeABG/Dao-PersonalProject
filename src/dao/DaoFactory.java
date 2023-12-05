@@ -5,7 +5,6 @@ import dao.implementation.SellerDao;
 import db.DB;
 import entities.Department;
 import entities.Seller;
-import java.sql.Connection;
 
 public abstract class DaoFactory {
 

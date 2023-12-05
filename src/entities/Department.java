@@ -9,17 +9,15 @@ public class Department extends ModelEntity implements Serializable{
     private String name;
 
     //Constructor
-    public Department(Integer id, String name) {
-        setId(id);
+    public Department(String name) {
         setName(name);
-        setTableName("department");
     }
 
     //Methods
     @Override
     public String toString(){
-        return "\nID: " + getId() + "\n"
-                + "Name: " + getName();
+        return "ID: " + getId() + "\n"
+                + "Name: " + getName() + "\n";
     }
 
     @Override

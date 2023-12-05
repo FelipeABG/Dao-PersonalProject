@@ -152,6 +152,28 @@ public class SellerDao implements Dao<Seller> {
         }
     }
 
+    @Override
+    public void deleteById(Integer id) {
+        PreparedStatement statement = null;
+
+        try {
+            statement = conn.prepareStatement("""
+                    delete from seller where id = ?;
+                    """);
+
+            statement.setInt(1, id);
+
+            int rows = statement.executeUpdate();
+
+        }
+        catch (SQLException e){
+            throw new DataBaseException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(statement);
+        }
+    }
+
     public List<Seller> findByDepartment(Department department){
         PreparedStatement statement= null;
         ResultSet result = null;
@@ -179,26 +201,7 @@ public class SellerDao implements Dao<Seller> {
         }
     }
 
-    //Auxiliary methods
-    private Seller instanciateSeller(ResultSet result, Department department) throws SQLException{
-        String sellerName = result.getString("seller_name");
-        Integer sellerId = result.getInt("id");
-        String sellerEmail = result.getString("email");
-        Date sellerBirthDate = result.getDate("birth_date");
-        Double sellerSalary = result.getDouble("base_salary");
 
-        Seller sl = new Seller( sellerName, sellerEmail,
-                sellerBirthDate, sellerSalary, department);
-
-        sl.setId(sellerId);
-        return sl;
-    }
-
-    private Department instanciateDepartment(ResultSet result) throws SQLException{
-        String departmentName = result.getString("department_name");
-        Integer departmentId = result.getInt("department_id");
-        return new Department(departmentId, departmentName);
-    }
 
     //Accessors
     public Connection getConn() {
