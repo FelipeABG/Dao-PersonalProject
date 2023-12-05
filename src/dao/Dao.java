@@ -1,5 +1,6 @@
 package dao;
 
+import db.DB;
 import db.DataBaseException;
 import entities.ModelEntity;
 import java.sql.*;
@@ -14,10 +15,11 @@ public interface Dao<entity extends ModelEntity>{
     entity findById(Integer id);
 
     //Default methods
-    default void deleteById(Integer id, Connection conn){
+    default void deleteById(Integer id){
         String tableName = entity.getTableName();
+        Connection conn = DB.getConnection();
         try{
-            PreparedStatement statement = conn.prepareStatement("delete from ? where id = ?");
+            PreparedStatement statement = conn.prepareStatement("delete from " +tableName + " where id = ?");
 
             statement.setString(1, tableName);
             statement.setInt(2, id);

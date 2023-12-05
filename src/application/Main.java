@@ -48,5 +48,8 @@ public class Main {
         System.out.println();
 
 
+        System.out.println("#### Test seller delete ####");
+        sellerDao.deleteById(7);
+        System.out.println();
     }
 }
