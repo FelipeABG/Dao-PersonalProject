@@ -33,7 +33,7 @@ public class Seller extends ModelEntity implements Serializable {
                 + "Email: " + getEmail() + "\n"
                 + "Birth date: " + getBirthDate() + "\n"
                 + "base salary: " + getBaseSalary() + "\n"
-                +"Department: " + getDepartment() + "\n";
+                +"Department ID: " + getDepartment().getId() + "\n";
 
     }
 
