@@ -61,7 +61,31 @@ public class SellerDao implements Dao<Seller> {
 
     @Override
     public void update(Seller o) {
+        PreparedStatement statement = null;
 
+        try{
+            statement = conn.prepareStatement("""
+                    update seller set\s
+                    seller_name = ?, email = ?, birth_date = ?, base_salary = ?, department_id = ?\s
+                    where id = ?
+                    """);
+
+            statement.setString(1, o.getName());
+            statement.setString(2, o.getEmail());
+            statement.setDate(3, o.getBirthDate());
+            statement.setDouble(4, o.getBaseSalary());
+            statement.setInt(5,o.getDepartment().getId());
+            statement.setInt(6,o.getId());
+
+            statement.executeUpdate();
+
+        }
+        catch (SQLException e){
+            throw new DataBaseException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(statement);
+        }
     }
 
     @Override

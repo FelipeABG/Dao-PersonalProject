@@ -6,7 +6,6 @@ import dao.implementation.SellerDao;
 import entities.Department;
 import entities.Seller;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
@@ -34,13 +33,19 @@ public class Main {
 
 
         System.out.println("#### Test seller insert ####");
-        Seller seller1 = new Seller("Felipe Orange", "felipe@gmail.com",
-                Date.valueOf("2023-12-03"), 1500.0,new Department(2, "Electronics"));
+        Seller seller1 = new Seller("Felipe Orange", "felipe@gmail.com", Date.valueOf("2023-12-03"),
+                1500.0,new Department(2, "Electronics"));
         sellerDao.insert(seller1);
         System.out.println(sellerDao.findById(seller1.getId()));
         System.out.println();
 
 
+        System.out.println("#### Test seller update ####");
+        Seller seller2 = sellerDao.findById(4);
+        seller2.setBaseSalary(7600.00);
+        sellerDao.update(seller2);
+        System.out.println(sellerDao.findById(4));
+        System.out.println();
 
 
     }
